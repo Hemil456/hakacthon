@@ -196,6 +196,7 @@ border-radius:5px;
 
 <li onclick="page('Dashboard')">🏠 Dashboard</li>
 <li onclick="page('Orders')">📦 Orders</li>
+<li onclick="page('Products')">🛒 Products</li>
 <li onclick="page('Delivery')">🚚 Delivery</li>
 <li onclick="page('Receipt')">🧾 Receipt</li>
 <li onclick="page('Support')">💬 Support</li>
@@ -274,6 +275,50 @@ border-radius:5px;
 <td>Amit</td>
 <td>Vadodara</td>
 <td>Cancelled</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- Products -->
+
+<div class="table-box">
+
+<h3>Products</h3>
+
+<button onclick="addProduct()">➕ Add Product</button>
+
+<br><br>
+
+<table id="productTable">
+
+<tr>
+<th>Product ID</th>
+<th>Name</th>
+<th>Price</th>
+<th>Stock</th>
+</tr>
+
+<tr>
+<td>P101</td>
+<td>Wireless Mouse</td>
+<td>₹600</td>
+<td>120</td>
+</tr>
+
+<tr>
+<td>P102</td>
+<td>Keyboard</td>
+<td>₹900</td>
+<td>75</td>
+</tr>
+
+<tr>
+<td>P103</td>
+<td>Headphones</td>
+<td>₹1500</td>
+<td>40</td>
 </tr>
 
 </table>
@@ -364,6 +409,12 @@ alert("Tracking delivery on map...");
 
 function receipt(){
 alert("Receipt downloaded!");
+}
+
+/* Products */
+
+function addProduct(){
+alert("Add new product feature coming soon!");
 }
 
 /* Chat */
