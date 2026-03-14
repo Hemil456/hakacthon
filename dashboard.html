@@ -1,20 +1,392 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
-<link rel="stylesheet" href="../css/style.css">
-<script src="../js/dashboard.js"></script>
+<title>Advanced Delivery Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#0f172a,#020617);
+color:white;
+display:flex;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#020617;
+padding:25px;
+box-shadow:2px 0 10px rgba(0,0,0,0.6);
+}
+
+.sidebar h2{
+margin-bottom:30px;
+}
+
+.sidebar li{
+list-style:none;
+padding:12px;
+margin-bottom:10px;
+background:#1e293b;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar li:hover{
+background:#334155;
+transform:translateX(5px);
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:30px;
+}
+
+/* Header */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.search{
+padding:10px;
+width:260px;
+background:#1e293b;
+border:none;
+border-radius:8px;
+color:white;
+}
+
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:rgba(30,41,59,0.7);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+background:#334155;
+}
+
+.card h3{
+color:#94a3b8;
+}
+
+.card p{
+font-size:26px;
+font-weight:bold;
+}
+
+/* Table */
+
+.table-box{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+margin-bottom:30px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+}
+
+th{
+background:#020617;
+}
+
+tr:hover{
+background:#334155;
+}
+
+/* Buttons */
+
+button{
+padding:8px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+color:white;
+background:#22c55e;
+transition:0.3s;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+/* Delivery Section */
+
+.delivery{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+margin-bottom:30px;
+}
+
+/* Receipt */
+
+.receipt{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+width:300px;
+}
+
+/* Chat */
+
+.chatbox{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+display:none;
+width:250px;
+}
+
+.chatbox input{
+width:100%;
+padding:8px;
+margin-top:5px;
+margin-bottom:5px;
+background:#020617;
+border:none;
+color:white;
+border-radius:5px;
+}
+
+</style>
+
 </head>
+
 <body>
-<div id="navbar"></div>
-<div class="container">
-<h1>Dashboard</h1>
-<div class="grid">
-<div class="box">Products</div>
-<div class="box">Receipts</div>
-<div class="box">Deliveries</div>
-<div class="box">Transfers</div>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<h2>🚚 DeliverX</h2>
+
+<li onclick="page('Dashboard')">🏠 Dashboard</li>
+<li onclick="page('Orders')">📦 Orders</li>
+<li onclick="page('Delivery')">🚚 Delivery</li>
+<li onclick="page('Receipt')">🧾 Receipt</li>
+<li onclick="page('Support')">💬 Support</li>
+
 </div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<h2>Admin Dashboard</h2>
+
+<input id="searchInput" class="search" placeholder="Search orders...">
+
 </div>
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Orders</h3>
+<p>1245</p>
+</div>
+
+<div class="card">
+<h3>Delivered</h3>
+<p>1030</p>
+</div>
+
+<div class="card">
+<h3>Pending</h3>
+<p>150</p>
+</div>
+
+<div class="card">
+<h3>Revenue</h3>
+<p>₹85,000</p>
+</div>
+
+</div>
+
+<!-- Orders -->
+
+<div class="table-box">
+
+<h3>Recent Orders</h3>
+
+<table id="orderTable">
+
+<tr>
+<th>Order</th>
+<th>Customer</th>
+<th>City</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>#101</td>
+<td>Rahul</td>
+<td>Ahmedabad</td>
+<td>Delivered</td>
+</tr>
+
+<tr>
+<td>#102</td>
+<td>Priya</td>
+<td>Surat</td>
+<td>Pending</td>
+</tr>
+
+<tr>
+<td>#103</td>
+<td>Amit</td>
+<td>Vadodara</td>
+<td>Cancelled</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- Delivery -->
+
+<div class="delivery">
+
+<h3>Delivery Tracking</h3>
+
+<p>Driver: Raj</p>
+<p>Location: Ahmedabad</p>
+<p>Status: Out for Delivery</p>
+
+<button onclick="track()">Track Delivery</button>
+
+</div>
+
+<!-- Receipt -->
+
+<div class="receipt">
+
+<h3>Payment Receipt</h3>
+
+<p>Order #101</p>
+<p>Customer: Rahul</p>
+<p>Amount: ₹450</p>
+<p>Status: Paid</p>
+
+<button onclick="receipt()">Download Receipt</button>
+
+</div>
+
+<br>
+
+<button onclick="openChat()">💬 Open Live Chat</button>
+
+</div>
+
+<!-- Chat -->
+
+<div class="chatbox" id="chat">
+
+<h4>Live Chat</h4>
+
+<input id="msg" placeholder="Type message">
+
+<button onclick="send()">Send</button>
+
+<div id="messages"></div>
+
+</div>
+
+<script>
+
+/* Sidebar */
+
+function page(name){
+alert(name+" page opened");
+}
+
+/* Search */
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+
+let filter=this.value.toLowerCase();
+let rows=document.querySelectorAll("#orderTable tr");
+
+for(let i=1;i<rows.length;i++){
+
+let text=rows[i].innerText.toLowerCase();
+
+rows[i].style.display=text.includes(filter)?"":"none";
+
+}
+
+});
+
+/* Delivery */
+
+function track(){
+alert("Tracking delivery on map...");
+}
+
+/* Receipt */
+
+function receipt(){
+alert("Receipt downloaded!");
+}
+
+/* Chat */
+
+function openChat(){
+document.getElementById("chat").style.display="block";
+}
+
+function send(){
+
+let msg=document.getElementById("msg").value;
+
+if(msg!=""){
+
+document.getElementById("messages").innerHTML+="<p>You: "+msg+"</p>";
+
+document.getElementById("msg").value="";
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
